@@ -9,6 +9,7 @@ bpy.context.scene.render.engine = 'BLENDER_WORKBENCH'
 bpy.ops.import_scene.obj(filepath = modelpath)
 bpy.data.scenes['Scene'].render.filepath = pngpath
 print('rendering')
+import pdb; pdb.set_trace()
 bpy.ops.render.render( write_still=True)
 print('rendered')
 sys.exit(0) # exit python and blender
