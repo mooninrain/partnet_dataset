@@ -5,6 +5,7 @@ import sys
 modelpath = sys.argv[6]
 pngpath = sys.argv[7]
 
+bpy.context.scene.render.engine = 'BLENDER_WORKBENCH'
 bpy.ops.import_scene.obj(filepath = modelpath)
 bpy.data.scenes['Scene'].render.filepath = pngpath
 print('rendering')
