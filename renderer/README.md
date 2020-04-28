@@ -16,3 +16,5 @@ The codebase depends on Blender and some regular python dependencies. Please dow
 
         https://www.blender.org/download/
 
+
+/data/vision/billf/object-properties/dataset/billf-6/ShapeNetCore.v1/02691156/fff513f407e00e85a9ced22d91ad7027/model.obj
