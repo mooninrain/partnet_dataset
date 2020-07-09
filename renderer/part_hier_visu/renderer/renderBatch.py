@@ -1,9 +1,9 @@
-# import bpy
-# import os
-# import sys
+import bpy
+import os
+import sys
 
-# modelpath = sys.argv[6]
-# pngpath = sys.argv[7]
+modelpath = sys.argv[6]
+pngpath = sys.argv[7]
 
 bpy.context.scene.render.engine = 'CYCLES'
 bpy.ops.import_scene.obj(filepath = modelpath)
