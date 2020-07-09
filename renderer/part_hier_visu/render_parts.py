@@ -101,7 +101,7 @@ for idx in leaf_part_ids:
     mesh['v'] = v; mesh['f'] = f;
     root_v_list.append(v);
     root_f_list.append(f+tot_v_num);
-    tot_v_num += v.shape[0];
+    tot_v_num += v.shape[0]
 
 root_v = np.vstack(root_v_list)
 root_f = np.vstack(root_f_list)
@@ -144,7 +144,7 @@ def render(data):
     out_filename = os.path.join(cur_render_dir, str(data['id'])+'.png')
     misc.imsave(out_filename, alpha_part)
     out_meta_fn = os.path.join(cur_render_dir, str(data['id'])+'.txt')
-    with open(out_meta_fn, 'w') as fout:
+    with open(out_meta_fn, 'wb') as fout:
         fout.write(u' '.join((str(data['id']), data['name'], data['text'])).encode('utf-8').strip())
 
     return part_v, part_f
