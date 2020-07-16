@@ -117,10 +117,7 @@ cur_result_json = os.path.join(cur_shape_dir, 'result.json')
 with open(cur_result_json, 'r') as fin:
     tree_hier = json.load(fin)[0]
 
-color_count = 0
-color_select = [[0.93, 0, 0],[0, 0.93, 0],[0, 0, 0.93]]
-
-def render(data):
+def render(data,count=0):
     cur_v_list = []; cur_f_list = []; cur_v_num = 0;
     if 'objs' in data.keys():
         for child in data['objs']:
@@ -132,7 +129,7 @@ def render(data):
             cur_v_num += v.shape[0]
     elif 'children' in data.keys():
         for child in data['children']:
-            v, f = render(child)
+            v, f = render(child,count+1)
             cur_v_list.append(v)
             cur_f_list.append(f+cur_v_num)
             cur_v_num += v.shape[0]
@@ -142,10 +139,11 @@ def render(data):
     part_v = np.vstack(cur_v_list)
     part_f = np.vstack(cur_f_list)
 
-    part_render = render_mesh(part_v, part_f, color=color_select[color_count])
-    color_count+=1
-    if color_count >= 2:
-        color_count = 2
+    if count >= 2:
+        count = 2
+    color_select = [[0.93, 0, 0],[0, 0.93, 0],[0, 0, 0.93]]
+    part_render = render_mesh(part_v, part_f, color=color_select[count])
+    
     alpha_part = 0.3 * root_render + 0.7 * part_render
     out_filename = os.path.join(cur_render_dir, str(data['id'])+'.png')
     misc.imsave(out_filename, alpha_part)
