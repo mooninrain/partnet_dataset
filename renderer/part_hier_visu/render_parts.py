@@ -139,7 +139,7 @@ def render(data):
     part_v = np.vstack(cur_v_list)
     part_f = np.vstack(cur_f_list)
 
-    part_render = render_mesh(part_v, part_f, color=[0.93, 0.93, 0.93])
+    part_render = render_mesh(part_v, part_f, color=[0.93, 0, 0])
     alpha_part = 0.3 * root_render + 0.7 * part_render
     out_filename = os.path.join(cur_render_dir, str(data['id'])+'.png')
     import pdb; pdb.set_trace()
