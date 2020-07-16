@@ -117,6 +117,9 @@ cur_result_json = os.path.join(cur_shape_dir, 'result.json')
 with open(cur_result_json, 'r') as fin:
     tree_hier = json.load(fin)[0]
 
+color_count = 0
+color_select = [[0.93, 0, 0],[0, 0.93, 0],[0, 0, 0.93]]
+
 def render(data):
     cur_v_list = []; cur_f_list = []; cur_v_num = 0;
     if 'objs' in data.keys():
@@ -139,7 +142,10 @@ def render(data):
     part_v = np.vstack(cur_v_list)
     part_f = np.vstack(cur_f_list)
 
-    part_render = render_mesh(part_v, part_f, color=[0.93, 0, 0])
+    part_render = render_mesh(part_v, part_f, color=color_select[color_count])
+    color_count+=1
+    if color_count >= 2:
+        color_count = 2
     alpha_part = 0.3 * root_render + 0.7 * part_render
     out_filename = os.path.join(cur_render_dir, str(data['id'])+'.png')
     import pdb; pdb.set_trace()
