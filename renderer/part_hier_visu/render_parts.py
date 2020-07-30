@@ -113,6 +113,10 @@ root_v /= scale
 
 root_render = render_mesh(root_v, root_f)
 
+root_render_2 = render_mesh(root_v, root_f, color=[0.93, 0, 0])
+out_filename = os.path.join(cur_shape_dir, 'no_lighting', '0.png')
+misc.imsave(out_filename, root_render_2)
+
 cur_result_json = os.path.join(cur_shape_dir, 'result.json')
 with open(cur_result_json, 'r') as fin:
     tree_hier = json.load(fin)[0]
@@ -139,10 +143,7 @@ def render(data,count=0):
     part_v = np.vstack(cur_v_list)
     part_f = np.vstack(cur_f_list)
 
-    if count >= 2:
-        count = 2
-    color_select = [[0.93, 0, 0],[0, 0.93, 0],[0, 0, 0.93]]
-    part_render = render_mesh(part_v, part_f, color=color_select[count])
+    part_render = render_mesh(part_v, part_f, color=[0.93, 0, 0])
     
     alpha_part = 0.3 * root_render + 0.7 * part_render
     out_filename = os.path.join(cur_render_dir, str(data['id'])+'.png')
