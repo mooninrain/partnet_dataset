@@ -114,7 +114,10 @@ root_v /= scale
 root_render = render_mesh(root_v, root_f)
 
 root_render_2 = render_mesh(root_v, root_f, color=[0.93, 0, 0])
-out_filename = os.path.join(cur_shape_dir, 'no_lighting', '0.png')
+cur_no_lighting_dir = os.path.join(cur_shape_dir, 'no_lighting')
+if not os.path.exists(cur_no_lighting_dir):
+    os.mkdir(cur_no_lighting_dir)
+out_filename = os.path.join(cur_no_lighting_dir, '0.png')
 misc.imsave(out_filename, root_render_2)
 
 cur_result_json = os.path.join(cur_shape_dir, 'result.json')
