@@ -2,8 +2,8 @@ import os, shutil
 import json
 from tqdm import tqdm
 
-_dir_ = 'data/vision/billf/scratch/ruidongwu/data/data_v0'
-dst_dir = 'data/vision/billf/scratch/ruidongwu/data/partnet/default'
+_dir_ = '/data/vision/billf/scratch/ruidongwu/data/data_v0'
+dst_dir = '/data/vision/billf/scratch/ruidongwu/data/partnet/default'
 
 if not os.path.exists(dst_dir):
     os.makedirs(dst_dir)
