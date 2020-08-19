@@ -150,7 +150,7 @@ def render(data,count=0):
     
     alpha_part = 0.3 * root_render + 0.7 * part_render
     out_filename = os.path.join(cur_render_dir, str(data['id'])+'.png')
-    misc.imsave(out_filename, part_render)
+    misc.imsave(out_filename, root_render)
     out_meta_fn = os.path.join(cur_render_dir, str(data['id'])+'.txt')
     with open(out_meta_fn, 'wb') as fout:
         fout.write(u' '.join((str(data['id']), data['name'], data['text'])).encode('utf-8').strip())
