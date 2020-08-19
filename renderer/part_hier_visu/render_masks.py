@@ -149,6 +149,7 @@ def render(data,count=0):
     part_render = render_mesh(part_v, part_f, color=[0.93, 0, 0])
     
     alpha_part = 0.3 * root_render + 0.7 * part_render
+    import pdb; pdb.set_trace()
     out_filename = os.path.join(cur_render_dir, str(data['id'])+'.png')
     misc.imsave(out_filename, root_render)
     out_meta_fn = os.path.join(cur_render_dir, str(data['id'])+'.txt')
