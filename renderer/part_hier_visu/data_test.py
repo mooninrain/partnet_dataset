@@ -11,4 +11,7 @@ for _dir_ in tqdm(all_dirs):
         data = json.load(r)
         num = len(data[0]['children'])
         all_nums.append(num)
+
+    if num>5:
+        print(_dir_,":",num)
 print(max(all_nums))
