@@ -1,6 +1,6 @@
 import os
 import json
-import tqdm
+from tqdm import tqdm
 
 root = '/data/vision/billf/scratch/ruidongwu/data/data_v0'
 all_dirs = os.listdir(root)
