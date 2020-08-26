@@ -90,7 +90,7 @@ cur_shape_dir = in_dir
 cur_part_dir = os.path.join(cur_shape_dir, 'objs')
 leaf_part_ids = [item.split('.')[0] for item in os.listdir(cur_part_dir) if item.endswith('.obj')]
 
-cur_render_dir = os.path.join(cur_shape_dir, 'parts_render')
+cur_render_dir = os.path.join(cur_shape_dir, 'masks_render')
 if not os.path.exists(cur_render_dir):
     os.mkdir(cur_render_dir)
 
@@ -124,6 +124,8 @@ cur_result_json = os.path.join(cur_shape_dir, 'result.json')
 with open(cur_result_json, 'r') as fin:
     tree_hier = json.load(fin)[0]
 
+
+to_render_parts = []
 def render(data,count=0):
     cur_v_list = []; cur_f_list = []; cur_v_num = 0;
     if 'objs' in data.keys():
@@ -146,17 +148,27 @@ def render(data,count=0):
     part_v = np.vstack(cur_v_list)
     part_f = np.vstack(cur_f_list)
 
-    part_render = render_mesh(part_v, part_f, color=[0.93, 0, 0])
-    
-    alpha_part = 0.3 * root_render + 0.7 * part_render
-    import pdb; pdb.set_trace()
+    # if count==0:
+    #     part_render = render_mesh(part_v, part_f, color=[0.93, 0, 0])
+    #     alpha_part = 0.3 * root_render + 0.7 * part_render
+    #     out_filename = os.path.join(cur_render_dir, str(data['id'])+'.png')
+    #     misc.imsave(out_filename, root_render)
+    #     out_meta_fn = os.path.join(cur_render_dir, str(data['id'])+'.txt')
+    #     with open(out_meta_fn, 'wb') as fout:
+    #         fout.write(u' '.join((str(data['id']), data['name'], data['text'])).encode('utf-8').strip())
     if count==1:
-        out_filename = os.path.join(cur_render_dir, str(data['id'])+'.png')
-        misc.imsave(out_filename, root_render)
-        out_meta_fn = os.path.join(cur_render_dir, str(data['id'])+'.txt')
-        with open(out_meta_fn, 'wb') as fout:
-            fout.write(u' '.join((str(data['id']), data['name'], data['text'])).encode('utf-8').strip())
+        part_render = render_mesh(part_v, part_f, color=[0.93, 0, 0])
+        global to_render_parts
+        to_render_parts.append(part_render)
 
     return part_v, part_f
 
 render(tree_hier)
+
+import pdb; pdb.set_trace()
+mean_render = 0
+for _part_ in part_render:
+    mean_render += _part_
+mean_render /= len(part_render)
+alpha_part = 0.3 * root_render + 0.7 * mean_render
+out_filename = os.path.join(cur_render_dir, str('0.png')
