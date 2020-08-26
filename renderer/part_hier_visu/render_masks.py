@@ -171,4 +171,4 @@ for _part_ in part_render:
     mean_render += _part_
 mean_render /= len(part_render)
 alpha_part = 0.3 * root_render + 0.7 * mean_render
-out_filename = os.path.join(cur_render_dir, str('0.png')
+out_filename = os.path.join(cur_render_dir, '0.png')
