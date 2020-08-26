@@ -126,6 +126,7 @@ with open(cur_result_json, 'r') as fin:
 
 
 to_render_parts = []
+color_base = [[0.93, 0, 0],[0, 0.93, 0], [0, 0, 0.93], [0.93, 0.93, 0], [0.93, 0, 0.93], [0, 0.93, 0.93]]
 def render(data,count=0):
     cur_v_list = []; cur_f_list = []; cur_v_num = 0;
     if 'objs' in data.keys():
@@ -157,7 +158,7 @@ def render(data,count=0):
     #     with open(out_meta_fn, 'wb') as fout:
     #         fout.write(u' '.join((str(data['id']), data['name'], data['text'])).encode('utf-8').strip())
     if count==1:
-        part_render = render_mesh(part_v, part_f, color=[0.93, 0, 0])
+        part_render = render_mesh(part_v, part_f, color=color_base[data['id']-1])
         global to_render_parts
         to_render_parts.append(part_render)
 
@@ -172,4 +173,4 @@ for _part_ in to_render_parts:
 mean_render /= len(to_render_parts)
 alpha_part = 0.3 * root_render + 0.7 * mean_render
 out_filename = os.path.join(cur_render_dir, '0.png')
-misc.imsave(out_filename, root_render)
+misc.imsave(out_filename, alpha_part)
