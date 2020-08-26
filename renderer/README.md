@@ -6,7 +6,7 @@ This repo contains code to generate html visualization for the final annotated h
 To run the code, use
 
         cd part_hier_visu
-        bash gen_html_view.sh [dir_path]
+        bash gen_masks.sh [dir_path]
 
 Replace `[dir_path]` to the folder that contains the downloaded annotation record.
 
