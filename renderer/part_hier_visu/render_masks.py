@@ -172,3 +172,4 @@ for _part_ in to_render_parts:
 mean_render /= len(to_render_parts)
 alpha_part = 0.3 * root_render + 0.7 * mean_render
 out_filename = os.path.join(cur_render_dir, '0.png')
+misc.imsave(out_filename, root_render)
